@@ -1,5 +1,5 @@
 
-# Software Engineering Best Practices
+# Software Development Best Practices
 
 ## 1. Consistent Coding Style
 - Use linters and formatters.
