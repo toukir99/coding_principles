@@ -3,157 +3,130 @@
 ## 1. Consistent Coding Style
 
 ### Principles:
-- Use linters and formatters.
-- Follow Google Java Style Guide.
+- **Use Linters and Formatters:** Automate code formatting to maintain consistency.
+- **Follow Coding Standards:** Adhere to industry-recognized style guides (e.g., Google Java Style Guide).
 
 ### Examples:
-1. **Use Linters and Formatters:**
-   Configure the project to automatically format code using tools like Prettier or ESLint for consistent styling across the codebase.
-2. **Follow Google Java Style Guide:**
-   Adhere to the guide to maintain uniformity in Java code structure, naming conventions, and formatting.
+- **Linters and Formatters:** Configure tools like Prettier or ESLint to enforce consistent code styling across the team.
+- **Google Java Style Guide:** Apply uniform Java code conventions, such as indentation, naming standards, and structure.
 
 ---
 
 ## 2. Comments
 
 ### Principles:
-- Write meaningful comments that explain the purpose of functions, classes, and complex logic.
+- **Meaningful Comments:** Explain the purpose of functions, classes, and complex logic to assist future developers.
 
 ### Examples:
-1. **Function Documentation:**
-   Add meaningful comments to functions like `CalculateEstimatedFare` to explain its purpose, inputs, and expected outputs, aiding future developers.
-2. **Complex Logic Explanation:**
-   For complex ride assignment algorithms, include inline comments to describe critical steps, such as prioritizing drivers based on proximity and rating.
+- **Function Documentation:** Add comments for methods like `CalculateEstimatedFare` to clarify inputs, outputs, and functionality.
+- **Complex Logic Explanation:** Include inline comments to describe intricate algorithms, such as driver prioritization by proximity and rating.
 
 ---
 
 ## 3. Robustness
 
 ### Principles:
-- Defensive Programming: Anticipate and handle potential failures or invalid inputs gracefully.
-- Error Handling: Use structured error handling to manage exceptions.
-- Resource Management: Ensure proper allocation and release of resources like memory, files, and database connections.
-- Edge Case Handling: Account for unusual or extreme inputs and scenarios.
-- Adherence to SOLID Principles: Follow design principles to create maintainable systems.
-- Testing: Rigorously test functional, unit, integration, and boundary conditions.
-- Code Clarity: Write clear, understandable, and maintainable code.
-- Logging and Monitoring: Log critical information and monitor systems.
-- Graceful Degradation: Allow the system to continue partial operations even in case of failure.
+- **Defensive Programming:** Anticipate failures and handle them gracefully.
+- **Error Handling:** Use structured approaches to manage exceptions.
+- **Resource Management:** Allocate and release resources like memory, files, or database connections responsibly.
+- **Edge Case Handling:** Account for unusual or extreme inputs and scenarios.
+- **Testing:** Perform unit, integration, and performance tests.
+- **Logging and Monitoring:** Log critical events and monitor system health.
+- **Graceful Degradation:** Allow partial operations during failures.
 
 ### Examples:
-1. **Defensive Programming:**
-   Check for invalid inputs in the ride request, such as missing pickup or drop-off locations, and return appropriate error messages.
-2. **Error Handling:**
-   Handle payment gateway timeouts by retrying or notifying users with a friendly error message.
-3. **Resource Management:**
-   Ensure database connections are properly closed after each operation to prevent connection leaks.
-4. **Edge Case Handling:**
-   Account for scenarios like extreme weather or no available drivers, offering alternative solutions.
-5. **Testing:**
-   Implement unit tests for fare calculation and integration tests for the ride-booking workflow.
-6. **Code Clarity:**
-   Write clear code for features like ride cancellation to ensure readability and maintainability.
-7. **Logging and Monitoring:**
-   Log ride cancellations and monitor system health to detect issues early.
-8. **Graceful Degradation:**
-   Allow the app to show ride history even if live ride tracking is unavailable.
+- **Defensive Programming:** Validate ride requests for missing pickup/drop-off locations and return user-friendly error messages.
+- **Error Handling:** Manage payment gateway timeouts by retrying or notifying users appropriately.
+- **Resource Management:** Close database connections promptly to prevent leaks.
+- **Edge Case Handling:** Handle situations like no available drivers by suggesting alternate transport modes.
+- **Testing:** Write unit tests for fare calculation and perform integration tests on the booking process.
+- **Logging and Monitoring:** Log cancellations and monitor driver location updates to identify system bottlenecks.
+- **Graceful Degradation:** Display ride history when live tracking is temporarily unavailable.
 
 ---
 
 ## 4. SOLID Principles
 
 ### Principles:
-- **S:** Single Responsibility Principle (SRP): Keep each class focused on one responsibility.
-- **O:** Open/Closed Principle (OCP): Code should be open for extension but closed for modification.
-- **L:** Liskov Substitution Principle (LSP): Subtypes should work interchangeably with their base types.
-- **I:** Interface Segregation Principle (ISP): Use specific, smaller interfaces instead of forcing classes to implement irrelevant methods.
-- **D:** Dependency Inversion Principle (DIP): High-level modules should depend on abstractions, not low-level modules.
+- **S (Single Responsibility):** Each class should handle only one responsibility.
+- **O (Open/Closed):** Code should be open for extension but closed for modification.
+- **L (Liskov Substitution):** Subtypes should replace base types without altering functionality.
+- **I (Interface Segregation):** Favor specific, smaller interfaces over large, general ones.
+- **D (Dependency Inversion):** Depend on abstractions, not concrete implementations.
 
 ### Examples:
-1. **SRP:**
-   Separate fare calculation logic from ride assignment into distinct classes.
-2. **OCP:**
-   Design the fare calculation system to support new fare types (e.g., promotional fares) without modifying existing code.
-3. **LSP:**
-   Ensure `EconomyRide` and `PremiumRide` can replace their base class `Ride` without breaking the system.
-4. **ISP:**
-   Define specific interfaces for ride types rather than a single large interface.
-5. **DIP:**
-   Use abstractions like `RidePaymentProcessor` instead of coupling to a specific payment gateway.
+- **SRP:** Separate `FareCalculator` and `RideAssigner` classes to maintain focus.
+- **OCP:** Add support for promotional fares without changing existing fare calculation code.
+- **LSP:** Ensure `EconomyRide` and `PremiumRide` replace the base class `Ride` seamlessly.
+- **ISP:** Create specific interfaces for tasks like payment processing and ride cancellation.
+- **DIP:** Use an abstraction like `PaymentProcessor` to decouple the system from specific payment gateways.
 
 ---
 
 ## 5. Make Testing Easy
 
 ### Principles:
-- Design code that supports easy testing, including regression, unit, integration, and performance testing.
+- Design systems that are easy to test at all levels: unit, integration, regression, and performance.
 
 ### Examples:
-1. **Unit Testing:**
-   Write isolated tests for components like the distance calculation function.
-2. **End-to-End Testing:**
-   Validate the complete ride-booking flow from start to finish.
-3. **Regression Testing:**
-   Ensure new payment methods don’t break existing wallet payment functionality.
-4. **Smoke Testing:**
-   Perform basic checks to verify ride requests work after deployments.
-5. **API and Integration Testing:**
-   Test interactions between the app and external APIs like mapping services.
-6. **Performance Testing:**
-   Simulate high loads during peak hours to assess scalability.
-7. **Security Testing:**
-   Identify vulnerabilities and secure user data.
-8. **Acceptance Testing:**
-   Confirm rides can be requested within specified service areas.
-9. **User I/O Testing:**
-   Test inputs like location selection and outputs like fare estimates for correctness.
+- **Unit Testing:** Test isolated functions like `CalculateDistance`.
+- **Integration Testing:** Verify interactions between components like ride booking and payment.
+- **Regression Testing:** Ensure new features don’t break existing ones, such as new promo codes not affecting regular fares.
+- **Performance Testing:** Simulate peak traffic conditions to evaluate scalability.
+- **Security Testing:** Scan for vulnerabilities in payment and user data handling.
 
 ---
 
 ## 6. Abstraction
 
+### Principles:
+- Hide complex logic from other systems by creating high-level functions.
+
 ### Examples:
-1. **Driver Assignment:**
-   Use a high-level function like `AssignDriverToRide(rideRequest)` to calculate distance, check availability, and assign drivers, hiding complexities from other systems.
-2. **Payment Processing:**
-   Expose a method like `ProcessPayment(rideID, paymentDetails)` to handle payment types and tax calculations without revealing internal details.
+- **Driver Assignment:** Abstract steps like availability checks and proximity calculations into a method `AssignDriverToRide`.
+- **Payment Processing:** Encapsulate tax calculations and payment handling in a `ProcessPayment` function.
 
 ---
 
 ## 7. Utilize Design Patterns but Don’t Over-Design
 
+### Principles:
+- Apply design patterns where applicable but avoid unnecessary complexity.
+
 ### Examples:
-1. **Ride State Management:**
-   Use the State Pattern to manage ride lifecycle transitions (e.g., `Requested -> Accepted -> InProgress -> Completed -> Cancelled`).
-2. **Vehicle Selection:**
-   Use the Factory Pattern to create vehicle objects based on user preferences (e.g., `EconomyVehicle`, `PremiumVehicle`).
+- **State Pattern:** Manage ride lifecycle transitions (e.g., Requested → Accepted → Completed).
+- **Factory Pattern:** Dynamically create objects for vehicle types based on user preferences.
 
 ---
 
 ## 8. Reduce Global Dependencies
 
+### Principles:
+- Avoid global variables to enhance maintainability and testability.
+
 ### Examples:
-1. **Driver Location Tracking:**
-   Use a dedicated service to manage driver locations instead of global variables.
-2. **Configuration Management:**
-   Centralize configuration loading in a module to avoid scattered global variables.
+- **Driver Location Tracking:** Use a dedicated service to store and update driver locations.
+- **Centralized Configuration:** Load settings from a configuration module to avoid hardcoded values.
 
 ---
 
 ## 9. Continuous Refactoring
 
+### Principles:
+- Regularly improve code structure and performance without altering functionality.
+
 ### Examples:
-1. **Database Schema Optimization:**
-   Archive old ride history data to improve query performance.
-2. **Code Structure Cleanup:**
-   Refactor ride-matching logic into reusable functions for better readability.
+- **Database Optimization:** Archive completed rides to reduce query times.
+- **Code Cleanup:** Refactor ride-matching logic into reusable components.
 
 ---
 
 ## 10. Security is a Top Priority
 
+### Principles:
+- Protect user data and system integrity through secure coding practices.
+
 ### Examples:
-1. **Secure User Authentication:**
-   Use hashed passwords (e.g., bcrypt) and enforce multi-factor authentication for admin accounts.
-2. **Input Validation:**
-   Validate user inputs to prevent SQL injection or other attacks, such as ensuring destination addresses are sanitized before processing.
+- **User Authentication:** Hash passwords with bcrypt and enforce multi-factor authentication for admins.
+- **Input Validation:** Sanitize user inputs to prevent SQL injection and other attacks.
+
