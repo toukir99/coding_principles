@@ -41,15 +41,44 @@ Design code that supports easy testing:
 ## 6. Abstraction
 Simplify complex logic by exposing only essential features, hiding unnecessary implementation details.
 
+### Example 1: Driver Assignment
+Instead of exposing raw algorithms or database queries for finding nearby drivers, you create a high-level function like `AssignDriverToRide(rideRequest)`. This function internally calculates distance, checks driver availability, and assigns the most suitable driver, hiding all these complexities from other parts of the system.
+
+### Example 2: Payment Processing
+For payments, you expose a simple method like `ProcessPayment(rideID, paymentDetails)` that handles various payment methods (credit card, wallet, etc.), tax calculations, and receipt generation internally. The booking service doesn’t need to know how payment gateways or tax systems work.
+
 ## 7. Utilize Design Patterns but Don't Over-Design
 Use proven solutions (e.g., Singleton, Factory, MVC, State) to common problems, but avoid unnecessary complexity.
+
+### Example 1: Ride State Management
+Use the **State Pattern** to manage the lifecycle of a ride (e.g., `Requested -> Accepted -> InProgress -> Completed -> Cancelled`). This ensures clean and maintainable code for transitioning between states, but you avoid adding unnecessary patterns like Visitor or Interpreter, which may overcomplicate the ride flow.
+
+### Example 2: Vehicle Selection
+Use the **Factory Pattern** to create vehicle objects based on user preferences (e.g., Economy, Premium, or Pool). For instance, a `VehicleFactory` can instantiate specific classes like `EconomyVehicle` or `PremiumVehicle` depending on the ride type. However, you don’t implement patterns like Proxy unless there’s a clear use case like monitoring or logging vehicle usage.
 
 ## 8. Reduce Global Dependencies
 Minimize shared state and global variables to improve modularity and prevent unintended side effects.
 
+### Example 1: Driver Location Tracking
+Instead of using a global variable to store all drivers' locations, implement a dedicated service that maintains and updates driver locations. Other services (e.g., ride assignment) interact with this service through well-defined APIs to retrieve necessary data.
+
+### Example 2: Configuration Management
+Avoid using global configuration variables scattered across the project. Use a configuration manager module that loads configurations once (e.g., from a file or environment variables) and provides them as needed, ensuring modularity and easier testing.
+
 ## 9. Continuous Refactoring
 Regularly improve code structure and quality without altering its behavior to maintain long-term maintainability.
+
+### Example 1: Database Schema Optimization
+Regularly review and optimize the database schema for rides and users. For instance, if ride history data grows too large, consider moving historical data to an archive table to improve query performance without altering functionality.
+
+### Example 2: Code Structure Cleanup
+Refactor the ride-matching logic by separating it into smaller, reusable functions (e.g., distance calculation, driver availability checks). This improves readability and makes the logic easier to test and maintain.
 
 ## 10. Security is a Top Priority
 Protect data and systems from vulnerabilities by implementing authentication, authorization, input validation, and secure coding practices.
 
+### Example 1: Secure User Authentication
+Implement robust authentication using hashed passwords (e.g., bcrypt) and enforce multi-factor authentication (MFA) for admin accounts to prevent unauthorized access.
+
+### Example 2: Input Validation
+Validate all user inputs, such as ride requests or payment details, to prevent SQL injection or other attacks. For example, ensure the destination address is sanitized and checked for validity before processing the request.
